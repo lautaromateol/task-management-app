@@ -1,20 +1,20 @@
-## Gestión de Proyectos:
-- Crear un proyecto nuevo.
-- Ver lista de proyectos.
-- Editar información del proyecto.
-- Eliminar un proyecto.
+## Project Management:
+- Create a new project.
+- View list of projects.
+- Edit project information.
+- Delete a project.
 
-## Gestión de Tareas:
-- Crear una nueva tarea.
-- Ver lista de tareas de un proyecto.
-- Editar detalles de una tarea.
-- Marcar una tarea como completada.
-- Mover una tarea entre categorías.
-- Filtrar tareas por estado.
-- Asignar una tarea a otro usuario.
-- Establecer prioridad de una tarea.
-- Agregar etiquetas a una tarea.
+## Task Management:
+- Create a new task.
+- View list of tasks within a project.
+- Edit task details.
+- Mark a task as completed.
+- Move a task between categories.
+- Filter tasks by status.
+- Assign a task to another user.
+- Set task priority.
+- Add tags to a task.
 
-## Interfaz de Usuario y Experiencia:
-- Recibir notificaciones de tareas próximas al vencimiento.
-- Ver un resumen de tareas pendientes en la página principal.
+## User Interface and Experience:
+- Receive notifications for tasks approaching deadline.
+- View a summary of pending tasks on the main page.

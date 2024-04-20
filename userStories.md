@@ -1,21 +1,21 @@
-# Historias de usuario
+# User Stories
 
-## Gestion de proyectos
-- Como usuario, quiero poder crear un nuevo proyecto para organizar mis tareas.
-- Como usuario, quiero poder ver una lista de todos los proyectos disponibles en mi panel de administración.
-- Como usuario, quiero poder eliminar un proyecto que ya no necesito.
-- Como usuario, quiero poder editar la información de un proyecto existente, como su nombre o descripción.
+## Project Management
+- As a user, I want to be able to create a new project to organize my tasks.
+- As a user, I want to be able to see a list of all available projects in my admin panel.
+- As a user, I want to be able to delete a project that I no longer need.
+- As a user, I want to be able to edit the information of an existing project, such as its name or description.
 
-## Gestion de tareas
-- Como usuario, quiero poder crear una nueva tarea dentro de un proyecto específico.
-- Como usuario, quiero poder ver todas las tareas asociadas a un proyecto en particular.
-- Como usuario, quiero poder editar los detalles de una tarea, como su nombre, descripción o plazo.
-- Como usuario, quiero poder desplazar una tarea entre distintas categorías, como "por hacer", "en progreso" y "finalizada".
-- Como usuario, quiero poder filtrar las tareas por su estado (por hacer, en progreso, finalizada) dentro de un proyecto.
-- Como usuario, quiero recibir notificaciones cuando se acerque la fecha de vencimiento de una tarea.
-- Como usuario, quiero poder asignar una tarea a otro usuario dentro del mismo proyecto. (Implementacion futura)
-- Como usuario, quiero poder establecer una prioridad para mis tareas, para organizarlas mejor.
+## Task Management
+- As a user, I want to be able to create a new task within a specific project.
+- As a user, I want to be able to see all tasks associated with a particular project.
+- As a user, I want to be able to edit the details of a task, such as its name, description, or deadline.
+- As a user, I want to be able to move a task between different categories, such as "to do," "in progress," and "completed."
+- As a user, I want to be able to filter tasks by their status (to do, in progress, completed) within a project.
+- As a user, I want to receive notifications when the deadline of a task is approaching.
+- As a user, I want to be able to assign a task to another user within the same project. (Future implementation)
+- As a user, I want to be able to set a priority for my tasks to better organize them.
 
-## Interfaz de usuario y experiencia
-- Como usuario, quiero poder agregar etiquetas a mis tareas para clasificarlas por temas o categorías.
-- Como usuario, quiero poder ver un resumen de mis tareas pendientes en la página principal de la aplicación.
+## User Interface and Experience
+- As a user, I want to be able to add tags to my tasks to classify them by themes or categories.
+- As a user, I want to be able to see a summary of my pending tasks on the main page of the application.
