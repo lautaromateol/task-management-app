@@ -109,6 +109,15 @@ html {
   border-bottom-right-radius: 5rem;
 }
 
+.project a {
+  color: #d2d2db;
+  text-decoration: none;
+}
+
+.project a:hover {
+  color: #d2d2db;
+}
+
 .svg-icon {
   width: 1.6rem;
   height: 1.6rem;
