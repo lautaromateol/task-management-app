@@ -68,3 +68,16 @@ export const getTask = (parentId, id) => {
 
   return task
 }
+
+export const changeTaskStatus = (newTask, parentId) => {
+
+  const project = state.projects.find((el) => el.id === parentId)
+
+  if(!project) return 
+
+  const newTasksArr = project.tasks.map((el) => el.id === newTask.id ? newTask : el)
+
+  project.tasks = newTasksArr
+
+  projectPersistance()
+}

@@ -5,25 +5,41 @@ class TaskInfoView extends View {
   _parentElement = document.querySelector(".task__description")
   _closeModalBtn
 
-  constructor() {
-    super()
-
-    const config = { childList: true, subtree: true }
-
-    const callback = (mutationsList, observer) => {
+  addModalIntersectionObserver(handler) {
+    const callback = (mutationsList) => {
       mutationsList.forEach((mutation) => {
         if (mutation.type === 'childList' && mutation.addedNodes.length) {
           this._closeModalBtn = this._parentElement.querySelector(".close__modal")
           this._addModalEvent(this._closeModalBtn, this._parentElement)
+          this._checkCheckboxes()
+          const checkboxes = this._parentElement.querySelectorAll(".subtask__checkbox")
+          const spans = this._parentElement.querySelectorAll(".subtask__span")
+          checkboxes.forEach((checkbox, i) => checkbox.addEventListener("change", () => {
+            spans[i].classList.toggle("subtask__span--done")
+            const newTask = this._data
+            newTask.subtasks[i].status = newTask.subtasks[i].status === "complete" ? "incomplete" : "complete"
+            handler(newTask, window.location.hash.slice(1))
+          }))
         }
-      })
+      });
     };
 
-    const observer = new MutationObserver(callback)
-    observer.observe(this._parentElement, config)
+    const observer = new MutationObserver(callback);
+    observer.observe(this._parentElement, { childList: true, subtree: true });
+
   }
 
   _generateMarkup() {
+
+    const subtasksMarkup = this._data.subtasks.map((subtask) => {
+      return `
+        <div class="subtask--checkbox">
+          <input class="subtask__checkbox" type="checkbox">
+          <span class="subtask__span ${subtask.status === "complete" && "subtask__span--done"}">${subtask.title}</span>
+        </div>
+      `
+    })
+
     return `
       <button class="close__modal">X</button>
       <p class="modal__title">
@@ -33,18 +49,21 @@ class TaskInfoView extends View {
         ${this._data.description}  
       </p>
       <div class="task__description--subtasks">
-        <div></div>
-        <div></div>
+        ${subtasksMarkup.join("")}
       </div>`
-    //   <div class="modal__field">
-    //     <label for="status" class="modal__field--title">Status</label>
-    //     <select class="field__input" id="status">
-    //      <option value="todo">Todo</option>
-    //      <option value="doing">Doing</option>
-    //      <option value="done">Done</option>
-    //     </select>
-    //  </div>
   }
+
+  _checkCheckboxes() {
+    const checkboxes = this._parentElement.querySelectorAll(".subtask__checkbox")
+    const subtasks = this._data.subtasks
+
+    checkboxes.forEach((checkbox, i) => {
+      if (subtasks[i].status === "complete") {
+        checkbox.checked = true
+      }
+    })
+  }
+
 }
 
 export default new TaskInfoView()

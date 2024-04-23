@@ -29,7 +29,9 @@ class AddTaskView extends View {
     const description = this._parentElement.querySelector("#task_description").value;
     const status = this._parentElement.querySelector("#task_status").value;
     const subtasks = Array.from(this._parentElement.querySelectorAll(".subtask__input"))
-      .map(input => input.value);
+      .map(input => {
+        return { title: input.value, status: "complete" }
+      });
 
     return {
       parentId,
@@ -53,13 +55,13 @@ class AddTaskView extends View {
     input.type = "text";
     input.placeholder = "Enter subtask";
     inputButtonContainer.appendChild(input);
-    
+
     deleteBtn.classList.add("delete__button")
     deleteBtn.innerHTML = "X";
     deleteBtn.addEventListener("click", () => {
       inputButtonContainer.remove()
     })
-    if(inputs.length !== 0) inputButtonContainer.appendChild(deleteBtn);
+    if (inputs.length !== 0) inputButtonContainer.appendChild(deleteBtn);
 
     container.appendChild(inputButtonContainer);
   }
@@ -67,7 +69,7 @@ class AddTaskView extends View {
   addTaskHandler(handler) {
     this._parentElement.addEventListener("submit", (e) => {
       e.preventDefault()
-      handler(this._parentElement); 
+      handler(this._parentElement);
     })
   }
 }
