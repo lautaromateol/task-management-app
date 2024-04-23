@@ -11,15 +11,15 @@ class AddProjectView extends View {
 
   constructor() {
     super()
-    this.addModalEvent(this._newProjectBtn, this._parentElement)
-    this.addModalEvent(this._closeModalBtn, this._parentElement)
+    this._addModalEvent(this._newProjectBtn, this._parentElement)
+    this._addModalEvent(this._closeModalBtn, this._parentElement)
   }
   
   getValues(){
 
-    const title = this._parentElement.querySelector(".new__project--title").value
+    const title = this._parentElement.querySelector("#project_title").value
 
-    const description = this._parentElement.querySelector(".new__project--description").value
+    const description = this._parentElement.querySelector("#project_description").value
 
     return {
       title,
@@ -27,14 +27,6 @@ class AddProjectView extends View {
       tasks: []
     }
 
-  }
-
-  clearInputs() {
-    this._parentElement.querySelectorAll(".field__input").forEach((input) => {
-      input.value = ""
-    })
-
-   this._parentElement.querySelectorAll(".error__message").forEach((el) => el.remove())
   }
 
   addProjectHandler(handler) {

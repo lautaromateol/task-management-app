@@ -1,22 +1,12 @@
 import * as model from "./model.js"
 import addProjectView from "./views/addProjectView.js"
 import projectsView from "./views/projectsView.js"
-
-// const taskCard = document.querySelectorAll(".task__card")
+import addTaskView from "./views/addTaskView.js"
+import tasksView from "./views/tasksView.js"
+import taskInfoView from "./views/taskInfoView.js"
 
 // btnAddTask.addEventListener("click", () => {
 //   toggleModal(".new__task--form")
-// })
-
-// newTaskForm.addEventListener("submit", (e) => {
-//   e.preventDefault()
-//   toggleModal(".new__task--form")
-// })
-
-// taskCard.forEach((el) => {
-//   el.addEventListener("click", () => {
-//     toggleModal(".task__description")
-//   })
 // })
 
 const controlRenderProjects = () => {
@@ -39,7 +29,7 @@ const controlAddProject = (modal) => {
   const values = addProjectView.getValues()
 
   //2. Validate inputs
-  if(model.state.projects.some((project) => project.title === values.title)) {
+  if(model.state.projects.some((el) => el.title === values.title)) {
     addProjectView.renderError("title", "This project name is already used")
   } 
 
@@ -66,10 +56,71 @@ const controlAddProject = (modal) => {
   projectsView.render(model.state.projects)
 }
 
+const controlAddTask = (modal) => {
+  
+   // 1. Get project title, description, status and tasks from form inputs
+   const {parentId, title, description, status, subtasks} = addTaskView.getValues()
+
+   //2. Validate inputs 
+   if(!title) {
+     addTaskView.renderError("title")
+     return
+   } 
+ 
+   if(!description) {
+     addTaskView.renderError("description")
+     return 
+   } 
+
+   if(!status) {
+    addTaskView.renderError("status")
+    return 
+  } 
+ 
+   // 3. Clear inputs
+   addTaskView.clearInputs()
+ 
+   // 4. Create task and added it to it corresponding project
+   const newTasks = model.createTask({
+    parentId: model.state.projects.find((el) => el.id === parentId).id,
+    title,
+    description,
+    subtasks,
+    status
+   })
+ 
+   // 5. Close modal
+   addTaskView.closeModal(modal)
+ 
+   // 6. Update tasks 
+   tasksView.render(newTasks)
+  }
+
+const controlRenderTasks = (hash) => {
+
+  // 1. Get tasks using hash
+  const tasks = model.getTasks(hash)
+
+  // 2. Render tasks on layout
+  tasksView.render(tasks)
+}
+
+const controlOpenTaskDescription = (parentId, id) => {
+
+  // 1. Get task by parentId and name
+  const task = model.getTask(parentId, id)
+  
+  // 2. Render task description
+  taskInfoView.render(task)
+}
+
 const init = () => {
   // model.clear()
   controlRenderProjects()
   addProjectView.addProjectHandler(controlAddProject)
+  addTaskView.addTaskHandler(controlAddTask)
+  tasksView.addRenderTasksHandler(controlRenderTasks)
+  tasksView.addRenderTaskInfoHandler(controlOpenTaskDescription)
 }
 
 init()

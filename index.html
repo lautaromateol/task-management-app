@@ -10,45 +10,35 @@
   <body>
     <div id="app">
       <form class="new__task--form modal hidden">
+        <span class="close__modal">X</span>
         <p class="modal__title">Add New Task</p>
         <div class="modal__field">
-          <label for="title" class="modal__field--title">Title</label>
+          <label for="task_title" class="modal__field--title">Title</label>
           <input
             class="field__input"
-            id="title"
+            id="task_title"
             type="text"
             placeholder="e.g: Take coffee break"
           />
         </div>
         <div class="modal__field">
-          <label for="description" class="modal__field--title"
+          <label for="task_description" class="modal__field--title"
             >Description</label
           >
           <textarea
             class="field__input"
-            id="description"
+            id="task_description"
             rows="5"
             placeholder="e.g: It's always good to take a break. This 15 minutes break will restore your energy."
           ></textarea>
         </div>
-        <div class="modal__field">
+        <div class="modal__field" id="subtasks_container">
           <label for="subtasks" class="modal__field--title">Subtasks</label>
-          <input
-            class="field__input mb-xs"
-            id="Subtasks"
-            type="text"
-            placeholder="e.g: Make coffee"
-          />
-          <input
-            class="field__input"
-            id="Subtasks"
-            type="text"
-            placeholder="e.g: Drink coffee & smile"
-          />
+          <div class="input--button"></div>
         </div>
         <div class="modal__field mb-xs">
-          <label for="status" class="modal__field--title">Status</label>
-          <select class="field__input" id="status">
+          <label for="task_status" class="modal__field--title">Status</label>
+          <select class="field__input" id="task_status">
             <option value="todo">Todo</option>
             <option value="doing">Doing</option>
             <option value="done">Done</option>
@@ -87,7 +77,7 @@
         <div class="modal__field mb-xs">
           <label for="project_title" class="modal__field--title">Title</label>
           <input
-            class="field__input new__project--title"
+            class="field__input"
             id="project_title"
             type="text"
             placeholder="e.g: Take coffee break"
@@ -98,13 +88,15 @@
             >Description</label
           >
           <textarea
-            class="field__input new__project--description"
+            class="field__input"
             id="project_description"
             rows="5"
             placeholder="e.g: It's always good to take a break. This 15 minutes break will restore your energy."
           ></textarea>
         </div>
-        <button type="submit" class="add__project--button main__btn">Create Project</button>
+        <button type="submit" class="add__project--button main__btn">
+          Create Project
+        </button>
       </form>
       <div class="overlay hidden"></div>
 
@@ -114,8 +106,7 @@
         </div>
         <div class="projects__container">
           <p class="projects__quantity--text">All projects (0)</p>
-          <ul class="projects">
-          </ul>
+          <ul class="projects"></ul>
           <p class="new__project--button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -140,59 +131,18 @@
           <p class="project__nav--text">Platform Launch</p>
           <button class="new__task--button main__btn">+Add New Task</button>
         </nav>
-        <div class="tasks__container">
-          <div class="status__container">
-            <div class="status">
-              <p class="status__title">TODO (4)</p>
-              <div class="task__card--container">
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-              </div>
-            </div>
-            <div class="status">
-              <p class="status__title">DOING (4)</p>
-              <div class="task__card--container">
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-              </div>
-            </div>
-            <div class="status">
-              <p class="status__title">DONE (4)</p>
-              <div class="task__card--container">
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-                <div class="task__card">
-                  <p>Build UI for onboarding flow</p>
-                  <span>0 of 3 substaks</span>
-                </div>
-              </div>
-            </div>
+        <div class="tasks__container hidden">
+          <div data-status="todo" class="status">
+            <p class="status__title">TODO (0)</p>
+            <div class="task__card--container"></div>
+          </div>
+          <div data-status="doing" class="status">
+            <p class="status__title">DOING (0)</p>
+            <div class="task__card--container"></div>
+          </div>
+          <div data-status="done" class="status">
+            <p class="status__title">DONE (0)</p>
+            <div class="task__card--container"></div>
           </div>
         </div>
       </section>

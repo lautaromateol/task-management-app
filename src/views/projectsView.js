@@ -9,12 +9,12 @@ class ProjectsView extends View {
     return this._data.map((project) => {
       return (
         `
-        <li class="project">
-          <a href="#${project.title.toLowerCase().replace(/\s/g, "-")}">
-          ${projectSvg}
-          ${project.title}
-          </a>
-        </li>
+        <a class="project" href="#${project.id}">
+          <li>
+            ${projectSvg}
+            ${project.title}
+         </li>
+        </a>
       `
       )
     }).join("")

@@ -38,8 +38,15 @@ class View {
     this._parentElement.innerHTML = ""
   }
 
-  addModalEvent(btn, modal) {
+  clearInputs() {
+    this._parentElement.querySelectorAll(".field__input").forEach((input) => {
+      input.value = ""
+    })
 
+   this._parentElement.querySelectorAll(".error__message").forEach((el) => el.remove())
+  }
+
+  _addModalEvent(btn, modal) {
     btn.addEventListener("click", (e) => {
       modal.classList.toggle("hidden")
       this._overlay.classList.toggle("hidden")

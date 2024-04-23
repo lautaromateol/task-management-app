@@ -93,12 +93,10 @@ html {
   margin-bottom: 0.8rem;
 }
 
-.project {
+.project li {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.8rem 3.2rem;
-  width: 90%;
 }
 
 .project:hover {
@@ -109,12 +107,14 @@ html {
   border-bottom-right-radius: 5rem;
 }
 
-.project a {
+.project {
+  width: 90%;
+  padding: 0.8rem 3.2rem;
   color: #d2d2db;
   text-decoration: none;
 }
 
-.project a:hover {
+.project:hover {
   color: #d2d2db;
 }
 
@@ -174,10 +174,8 @@ html {
 .tasks__container {
   background-color: #242424;
   height: 90vh;
-}
-
-.status__container {
   display: flex;
+  justify-content: space-around;
   gap: 1.2rem;
   padding: 3.2rem;
 }
@@ -270,6 +268,15 @@ html {
   color: white;
 }
 
+.input--button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subtask__input {
+  width: 90%;
+}
+
 .field__input:focus {
   outline: none;
 }
@@ -277,6 +284,12 @@ html {
 .task__description--description {
   font-size: 1.2rem;
   color: #d2d2db;
+}
+
+.delete__button {
+  background-color: #2c2c38;
+  border: none;
+  color: white;
 }
 
 .overlay {
