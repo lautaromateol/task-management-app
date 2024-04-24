@@ -117,9 +117,9 @@ const controlOpenTaskDescription = (parentId, id) => {
 const controlChangeStatus = (newTask, parentId) => {
   model.changeTaskStatus(newTask, parentId)
 
-  const project = model.state.projects.find((el) => el.id === parentId)
+  const tasks = model.getTasks(parentId)
 
-  // tasksView.update(project.tasks)
+  tasksView.render(tasks)
 }
 
 const init = () => {
