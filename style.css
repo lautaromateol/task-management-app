@@ -233,16 +233,24 @@ html {
   max-height: 95vh;
 }
 
-.close__modal {
+.close__modal, .delete__task {
   position: absolute;
   background-color: #2c2c38;
   color: white;
   border: none;
+}
+
+.close__modal {
   top: 0.8rem;
   right: 0.8rem;
 }
 
-.close__modal:hover {
+.delete__task {
+  top: 0.8rem;
+  left: 0.8rem;
+}
+
+.close__modal:hover, .delete__task:hover {
   cursor: pointer;
 }
 

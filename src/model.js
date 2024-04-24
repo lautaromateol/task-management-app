@@ -69,7 +69,7 @@ export const getTask = (parentId, id) => {
   return task
 }
 
-export const changeTaskStatus = (newTask, parentId) => {
+export const changeSubTaskStatus = (newTask, parentId) => {
 
   const project = state.projects.find((el) => el.id === parentId)
 
@@ -78,6 +78,19 @@ export const changeTaskStatus = (newTask, parentId) => {
   const newTasksArr = project.tasks.map((el) => el.id === newTask.id ? newTask : el)
 
   project.tasks = newTasksArr
+
+  projectPersistance()
+}
+
+export const deleteTask = (parentId, taskId) => {
+
+  const project = state.projects.find((el) => el.id === parentId)
+
+  if(!project) return 
+
+  const newTasks = project.tasks.filter((task) => task.id !== taskId)
+
+  project.tasks = newTasks
 
   projectPersistance()
 }

@@ -1,15 +1,20 @@
 import View from "./View";
+import { deleteIcon } from "../../snippets/deleteIcon"
 
 class TaskInfoView extends View {
 
   _parentElement = document.querySelector(".task__description")
   _closeModalBtn
 
-  addModalIntersectionObserver(handler) {
+  addModalIntersectionObserver(handler1, handler2) {
     const callback = (mutationsList) => {
       mutationsList.forEach((mutation) => {
         if (mutation.type === 'childList' && mutation.addedNodes.length) {
           this._closeModalBtn = this._parentElement.querySelector(".close__modal")
+          this._deleteTaskBtn = this._parentElement.querySelector(".delete__task")
+          this._deleteTaskBtn.addEventListener("click", () => {
+            handler2(window.location.hash.slice(1), this._data.id, this._parentElement)
+          })
           this._addModalEvent(this._closeModalBtn, this._parentElement)
           this._checkCheckboxes()
           const checkboxes = this._parentElement.querySelectorAll(".subtask__checkbox")
@@ -18,7 +23,7 @@ class TaskInfoView extends View {
             spans[i].classList.toggle("subtask__span--done")
             const newTask = this._data
             newTask.subtasks[i].status = newTask.subtasks[i].status === "complete" ? "incomplete" : "complete"
-            handler(newTask, window.location.hash.slice(1))
+            handler1(newTask, window.location.hash.slice(1))
           }))
         }
       });
@@ -41,7 +46,10 @@ class TaskInfoView extends View {
     })
 
     return `
+      <div>
+      <button class="delete__task">${deleteIcon}</button>
       <button class="close__modal">X</button>
+      </div>
       <p class="modal__title">
         ${this._data.title}
       </p>
