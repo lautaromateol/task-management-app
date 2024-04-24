@@ -12,7 +12,7 @@ class ProjectsView extends View {
         <a class="project" href="#${project.id}">
           <li>
             ${projectSvg}
-            ${project.title}
+            ${project.title.length > 19 ? `${project.title.substr(0, 19)}...` : project.title}
          </li>
         </a>
       `
