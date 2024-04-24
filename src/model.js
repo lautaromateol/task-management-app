@@ -109,3 +109,12 @@ export const changeTaskStatus = (parentId, taskId, newStatus) => {
 
   projectPersistance()
 }
+
+export const deleteProject = (projectId) => {
+
+  const newProjectsArr = state.projects.filter((project) => project.id !== projectId)
+
+  state.projects = newProjectsArr
+
+  projectPersistance()
+}

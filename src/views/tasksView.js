@@ -4,15 +4,17 @@ class TasksView extends View {
 
   _parentElement = document.querySelector(".status__container")
   _modalElement = document.querySelector(".task__description")
+  _buttonsContainer
 
-  addModalIntersectionObserver(handler) {
-    
+  addModalIntersectionObserver(handler1, handler2) {
+
     const config = { childList: true, subtree: true }
 
     const callback = (mutationsList, observer) => {
       mutationsList.forEach((mutation) => {
         if (mutation.type === 'childList' && mutation.addedNodes.length) {
           const taskCards = this._parentElement.querySelectorAll('.task__card')
+          this._buttonsContainer = document.querySelector(".buttons__container")
           if (taskCards) {
             taskCards.forEach((card) => {
               this._addModalEvent(card, this._modalElement)
@@ -21,7 +23,8 @@ class TasksView extends View {
           }
         }
       })
-      this._addDropEvent(handler)
+      this._addDropEvent(handler1)
+      this._addDeleteBtnEvent(handler2)
     };
 
     const observer = new MutationObserver(callback)
@@ -112,6 +115,7 @@ class TasksView extends View {
       if (!window.location.hash) return
 
       this._parentElement.classList.remove("hidden")
+      document.querySelector(".buttons__container").classList.remove("hidden")
       handler(window.location.hash.slice(1))
     }))
   }
@@ -123,6 +127,16 @@ class TasksView extends View {
       const id = task__card.dataset.id
       const parentId = window.location.hash.slice(1)
       handler(parentId, id)
+    })
+  }
+
+  _addDeleteBtnEvent(handler2) {
+    this._buttonsContainer.querySelector(".delete__project--button").addEventListener("click", () => {
+      handler2(window.location.hash.slice(1))
+      const cleanURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanURL);
+      this._buttonsContainer.classList.add("hidden")
+      this._parentElement.classList.add("hidden")
     })
   }
 }

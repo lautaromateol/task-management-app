@@ -142,6 +142,15 @@ const controlChangeTaskStatus = (parentId, taskId, newStatus) => {
   tasksView.render(tasks)
 }
 
+const controlDeleteProject = (projectId) => {
+
+  model.deleteProject(projectId)
+
+  projectsView.render(model.state.projects)
+
+  projectsView.renderProjectsLength()
+}
+
 const init = () => {
   // model.clear()
   controlRenderProjects()
@@ -149,7 +158,7 @@ const init = () => {
   addTaskView.addTaskHandler(controlAddTask)
   tasksView.addRenderTasksHandler(controlRenderTasks)
   tasksView.addRenderTaskInfoHandler(controlOpenTaskDescription)
-  tasksView.addModalIntersectionObserver(controlChangeTaskStatus)
+  tasksView.addModalIntersectionObserver(controlChangeTaskStatus, controlDeleteProject)
   taskInfoView.addModalIntersectionObserver(controlChangeSubTaskStatus, controlDeleteTask)
 }
 

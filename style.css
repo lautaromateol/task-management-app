@@ -157,18 +157,35 @@ html {
   font-weight: 600;
 }
 
+.buttons__container {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
 .main__btn {
-  background-color: #9775fa;
   border-radius: 5rem;
   border: none;
   padding: 0.8rem 1.2rem;
   color: white;
   font-weight: 600;
+  background-color: #9775fa;
+}
+
+.main__btn:hover {
+  background-color: #7048e8;
+}
+
+.delete__project--button {
+  background-color: #ab0c27;
+}
+
+.delete__project--button:hover {
+  background-color: #630313;
 }
 
 .main__btn:hover {
   cursor: pointer;
-  background-color: #7048e8;
 }
 
 .tasks__container {
