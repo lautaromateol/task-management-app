@@ -31,7 +31,7 @@ class AddTaskView extends View {
     const subtasksArr = Array.from(this._parentElement.querySelectorAll(".subtask__input"))
       .filter(input => input.value.trim());
     const subtasks = subtasksArr.map((input) => {
-      return { title: input.value, status: "complete" }
+      return { title: input.value, status: "incomplete" }
     })
 
     return {
