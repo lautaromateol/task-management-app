@@ -114,7 +114,7 @@ const controlOpenTaskDescription = (parentId, id) => {
   taskInfoView.render(task)
 }
 
-const controlChangeStatus = (newTask, parentId) => {
+const controlChangeSubTaskStatus = (newTask, parentId) => {
   model.changeSubTaskStatus(newTask, parentId)
 
   const tasks = model.getTasks(parentId)
@@ -133,6 +133,15 @@ const controlDeleteTask = (parentId, taskId, modal) => {
   tasksView.render(tasks)
 }
 
+const controlChangeTaskStatus = (parentId, taskId, newStatus) => {
+
+  model.changeTaskStatus(parentId, taskId, newStatus)
+
+  const tasks = model.getTasks(parentId)
+
+  tasksView.render(tasks)
+}
+
 const init = () => {
   // model.clear()
   controlRenderProjects()
@@ -140,7 +149,8 @@ const init = () => {
   addTaskView.addTaskHandler(controlAddTask)
   tasksView.addRenderTasksHandler(controlRenderTasks)
   tasksView.addRenderTaskInfoHandler(controlOpenTaskDescription)
-  taskInfoView.addModalIntersectionObserver(controlChangeStatus, controlDeleteTask)
+  tasksView.addModalIntersectionObserver(controlChangeTaskStatus)
+  taskInfoView.addModalIntersectionObserver(controlChangeSubTaskStatus, controlDeleteTask)
 }
 
 init()

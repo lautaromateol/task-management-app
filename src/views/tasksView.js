@@ -5,9 +5,8 @@ class TasksView extends View {
   _parentElement = document.querySelector(".status__container")
   _modalElement = document.querySelector(".task__description")
 
-  constructor() {
-    super()
-
+  addModalIntersectionObserver(handler) {
+    
     const config = { childList: true, subtree: true }
 
     const callback = (mutationsList, observer) => {
@@ -17,14 +16,53 @@ class TasksView extends View {
           if (taskCards) {
             taskCards.forEach((card) => {
               this._addModalEvent(card, this._modalElement)
+              this._addDragEvent(card)
             })
           }
         }
       })
+      this._addDropEvent(handler)
     };
 
     const observer = new MutationObserver(callback)
     observer.observe(this._parentElement, config)
+  }
+
+  _addModalEvent(card, modal) {
+    card.addEventListener("click", () => {
+      modal.classList.remove("hidden")
+      this._overlay.classList.remove("hidden")
+    })
+  }
+
+  _addDragEvent(card) {
+    card.setAttribute("draggable", "true")
+    card.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData('text/plain', e.target.dataset.id)
+    })
+  }
+
+  _addDropEvent(handler) {
+
+    const containers = this._parentElement.querySelectorAll(".status")
+
+    containers.forEach((container) => {
+      container.addEventListener("dragover", (e) => {
+        e.preventDefault()
+      })
+
+      container.addEventListener("drop", (e) => {
+        const taskId = e.dataTransfer.getData("text/plain")
+
+        const status = container.dataset.status
+
+        const card = this._parentElement.querySelector(`.task__card[data-id="${taskId}"]`)
+
+        container.querySelector(".task__card--container").appendChild(card)
+
+        handler(window.location.hash.slice(1), taskId, status)
+      })
+    })
   }
 
   _generateMarkup() {
@@ -57,7 +95,7 @@ class TasksView extends View {
 
     const statusContainers = ["todo", "doing", "done"].map((status) => {
       return (
-        `<div data-status="todo" class="status">
+        `<div data-status="${status}" class="status">
           <p class="status__title">${status.toUpperCase()} (${this._data.filter((task) => task.status === status).length})</p>
           <div class="task__card--container">
             ${cardsMarkups[status].join("")}
@@ -81,7 +119,7 @@ class TasksView extends View {
   addRenderTaskInfoHandler(handler) {
     this._parentElement.addEventListener("click", (e) => {
       const task__card = e.target.closest(".task__card")
-      if(!task__card) return
+      if (!task__card) return
       const id = task__card.dataset.id
       const parentId = window.location.hash.slice(1)
       handler(parentId, id)
