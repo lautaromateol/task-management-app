@@ -28,16 +28,17 @@ class AddTaskView extends View {
     const title = this._parentElement.querySelector("#task_title").value;
     const description = this._parentElement.querySelector("#task_description").value;
     const status = this._parentElement.querySelector("#task_status").value;
-    const subtasks = Array.from(this._parentElement.querySelectorAll(".subtask__input"))
-      .map(input => {
-        return { title: input.value, status: "complete" }
-      });
+    const subtasksArr = Array.from(this._parentElement.querySelectorAll(".subtask__input"))
+      .filter(input => input.value.trim());
+    const subtasks = subtasksArr.map((input) => {
+      return { title: input.value, status: "complete" }
+    })
 
     return {
       parentId,
       title,
       description,
-      subtasks: !subtasks.join("") ? [] : subtasks.slice(0, -1),
+      subtasks: subtasks.length ? subtasks : [],
       status,
     };
 
