@@ -2,7 +2,7 @@ import View from "./View";
 
 class TasksView extends View {
 
-  _parentElement = document.querySelector(".tasks__container")
+  _parentElement = document.querySelector(".status__container")
   _modalElement = document.querySelector(".task__description")
 
   constructor() {
