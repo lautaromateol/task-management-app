@@ -30,16 +30,16 @@ const controlAddProject = (modal) => {
 
   //2. Validate inputs
   if(model.state.projects.some((el) => el.title === values.title)) {
-    addProjectView.renderError("title", "This project name is already used")
+    addProjectView.renderError("project", "title", "This project name is already used")
   } 
 
   if(!values.title) {
-    addProjectView.renderError("title")
+    addProjectView.renderError("project", "title")
     return
   } 
 
   if(!values.description) {
-    addProjectView.renderError("description")
+    addProjectView.renderError("project", "description")
     return 
   } 
 
@@ -66,17 +66,22 @@ const controlAddTask = (modal) => {
 
    //2. Validate inputs 
    if(!title) {
-     addTaskView.renderError("title")
+     addTaskView.renderError("task", "title")
      return
    } 
+
+   if (model.state.projects[model.state.projects.findIndex((el) => el.id === parentId)].tasks.find((el) => el.title === title)) {
+    addTaskView.renderError("task", "title", "This task name is already used")
+    return
+   }
  
    if(!description) {
-     addTaskView.renderError("description")
+     addTaskView.renderError("task", "description")
      return 
    } 
 
    if(!status) {
-    addTaskView.renderError("status")
+    addTaskView.renderError("task", "status")
     return 
   } 
  

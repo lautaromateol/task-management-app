@@ -1,6 +1,7 @@
 class View {
 
   _overlay = document.querySelector(".overlay")
+  _errorMessage = "This field cannot be empty"
 
   render(data) {
     this._data = data
@@ -56,6 +57,18 @@ class View {
   closeModal (modal) {
     modal.classList.toggle("hidden")
     this._overlay.classList.toggle("hidden")
+  }
+
+  renderError(selectorName ,input, errorMsg = this._errorMessage) {
+
+    const errorMsgEl = this._parentElement.querySelector(`#${selectorName}_${input}`).nextElementSibling
+
+    if (errorMsgEl?.textContent === errorMsg) {
+      return
+    }
+
+    const errorMarkup = `<p class="error__message">${errorMsg}</p>`
+    this._parentElement.querySelector(`#${selectorName}_${input}`).insertAdjacentHTML("afterend", errorMarkup)
   }
 
 }
