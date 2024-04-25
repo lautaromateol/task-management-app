@@ -4,6 +4,7 @@ import projectsView from "./views/projectsView.js"
 import addTaskView from "./views/addTaskView.js"
 import tasksView from "./views/tasksView.js"
 import taskInfoView from "./views/taskInfoView.js"
+import dashboardView from "./views/dashboardView.js"
 
 // btnAddTask.addEventListener("click", () => {
 //   toggleModal(".new__task--form")
@@ -174,6 +175,8 @@ const controlDeleteProject = (projectId) => {
 const init = () => {
   // model.clear()
   controlRenderProjects()
+  dashboardView.addHideDashboardHandler()
+  dashboardView.addShowDashboardHandler()
   addProjectView.addProjectHandler(controlAddProject)
   addTaskView.addTaskHandler(controlAddTask)
   tasksView.addRenderTasksHandler(controlRenderTasks)
