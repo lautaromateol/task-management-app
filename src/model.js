@@ -48,8 +48,6 @@ export const createTask = ({ parentId, title, description, subtasks, status }) =
 
   const projectIndex = state.projects.findIndex((el) => el.id === parentId)
 
-  if (state.projects[projectIndex].tasks.find((el) => el.title === title)) return
-
   state.projects[projectIndex].tasks.push(task)
 
   projectPersistance()
