@@ -103,6 +103,11 @@ const controlRenderTasks = (hash) => {
 
   // 2. Render tasks on layout
   tasksView.render(tasks)
+
+  // 3. Get projects
+  const project = model.getProject(hash)
+
+  return project.title
 }
 
 const controlOpenTaskDescription = (parentId, id) => {

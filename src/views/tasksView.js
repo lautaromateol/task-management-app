@@ -4,6 +4,7 @@ class TasksView extends View {
 
   _parentElement = document.querySelector(".status__container")
   _modalElement = document.querySelector(".task__description")
+  _projectTitle = document.querySelector(".project__nav--text")
   _buttonsContainer
 
   addModalIntersectionObserver(handler1, handler2) {
@@ -116,7 +117,8 @@ class TasksView extends View {
 
       this._parentElement.classList.remove("hidden")
       document.querySelector(".buttons__container").classList.remove("hidden")
-      handler(window.location.hash.slice(1))
+      const title = handler(window.location.hash.slice(1))
+      this._projectTitle.innerHTML = title
     }))
   }
 
@@ -135,6 +137,7 @@ class TasksView extends View {
       handler2(window.location.hash.slice(1))
       const cleanURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
       window.history.replaceState({}, document.title, cleanURL);
+      this._projectTitle.innerHTML = "Create a new project or select one to start working"
       this._buttonsContainer.classList.add("hidden")
       this._parentElement.classList.add("hidden")
     })

@@ -8,6 +8,12 @@ export const getProjects = () => {
  if(projects) state.projects = JSON.parse(projects)
 }
 
+export const getProject = (projectId) => {
+  const project = state.projects.find((el) => el.id === projectId)
+
+  return project
+}
+
 export const projectPersistance = () => {
   window.localStorage.setItem("projects", JSON.stringify(state.projects))
 }
