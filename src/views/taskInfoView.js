@@ -1,5 +1,6 @@
 import View from "./View";
 import { deleteIcon } from "../../snippets/deleteIcon"
+import { cloneDeep } from "lodash";
 
 class TaskInfoView extends View {
 
@@ -21,9 +22,9 @@ class TaskInfoView extends View {
           const spans = this._parentElement.querySelectorAll(".subtask__span")
           checkboxes.forEach((checkbox, i) => checkbox.addEventListener("change", () => {
             spans[i].classList.toggle("subtask__span--done")
-            const newTask = this._data
+            const newTask = cloneDeep(this._data)
             newTask.subtasks[i].status = newTask.subtasks[i].status === "complete" ? "incomplete" : "complete"
-            handler1(newTask, window.location.hash.slice(1))
+            handler1(newTask, window.location.hash.slice(1), newTask.id)
           }))
         }
       });

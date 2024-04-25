@@ -119,12 +119,17 @@ const controlOpenTaskDescription = (parentId, id) => {
   taskInfoView.render(task)
 }
 
-const controlChangeSubTaskStatus = (newTask, parentId) => {
+const controlChangeSubTaskStatus = (newTask, parentId, id) => {
+
   model.changeSubTaskStatus(newTask, parentId)
 
   const tasks = model.getTasks(parentId)
 
+  const task = model.getTask(parentId, id)
+
   tasksView.render(tasks)
+
+  taskInfoView.render(task)
 }
 
 const controlDeleteTask = (parentId, taskId, modal) => {
