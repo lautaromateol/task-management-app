@@ -102,6 +102,8 @@ const controlAddTask = (modal) => {
  
    // 6. Update tasks 
    tasksView.render(newTasks)
+
+   return true
   }
 
 const controlRenderTasks = (hash) => {

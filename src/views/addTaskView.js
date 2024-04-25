@@ -5,6 +5,7 @@ class AddTaskView extends View {
   _parentElement = document.querySelector(".new__task--form")
   _newTaskBtn = document.querySelector(".new__task--button")
   _closeModalBtn = this._parentElement.querySelector(".close__modal")
+  _inputs
 
   constructor() {
     super()
@@ -14,9 +15,9 @@ class AddTaskView extends View {
     this._addSubtaskInput()
 
     this._parentElement.addEventListener("input", (event) => {
+      this._inputs = this._parentElement.querySelectorAll(".subtask__input")
       this._parentElement.querySelectorAll(".error__message").forEach((el) => el.remove())
-      const inputs = document.querySelectorAll(".subtask__input");
-      const lastInput = inputs[inputs.length - 1];
+      const lastInput = this._inputs[this._inputs.length - 1];
       if (event.target === lastInput && lastInput.value.trim() !== "") {
         this._addSubtaskInput();
       }
@@ -29,8 +30,7 @@ class AddTaskView extends View {
     const title = this._parentElement.querySelector("#task_title").value;
     const description = this._parentElement.querySelector("#task_description").value;
     const status = this._parentElement.querySelector("#task_status").value;
-    const subtasksArr = Array.from(this._parentElement.querySelectorAll(".subtask__input"))
-      .filter(input => input.value.trim());
+    const subtasksArr = Array.from(this._inputs).filter(input => input.value.trim());
     const subtasks = subtasksArr.map((input) => {
       return { title: input.value, status: "incomplete" }
     })
@@ -46,7 +46,6 @@ class AddTaskView extends View {
   }
 
   _addSubtaskInput() {
-    const inputs = document.querySelectorAll(".subtask__input")
     const container = this._parentElement.querySelector("#subtasks_container");
     const inputButtonContainer = document.createElement("div")
     const input = document.createElement("input");
@@ -63,7 +62,7 @@ class AddTaskView extends View {
     deleteBtn.addEventListener("click", () => {
       inputButtonContainer.remove()
     })
-    if (inputs.length !== 0) inputButtonContainer.appendChild(deleteBtn);
+    if (this._inputs?.length !== 0) inputButtonContainer.appendChild(deleteBtn);
 
     container.appendChild(inputButtonContainer);
   }
@@ -71,7 +70,12 @@ class AddTaskView extends View {
   addTaskHandler(handler) {
     this._parentElement.addEventListener("submit", (e) => {
       e.preventDefault()
-      handler(this._parentElement);
+      const deleteInputs = handler(this._parentElement);
+
+      if(!deleteInputs) return 
+      
+      const inputButtonContainers = this._parentElement.querySelectorAll(".input--button")
+      inputButtonContainers.forEach((container, i) => i !== 0 && container.remove())
     })
   }
 }
