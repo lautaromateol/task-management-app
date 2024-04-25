@@ -14,6 +14,7 @@ class AddTaskView extends View {
     this._addSubtaskInput()
 
     this._parentElement.addEventListener("input", (event) => {
+      this._parentElement.querySelectorAll(".error__message").forEach((el) => el.remove())
       const inputs = document.querySelectorAll(".subtask__input");
       const lastInput = inputs[inputs.length - 1];
       if (event.target === lastInput && lastInput.value.trim() !== "") {
