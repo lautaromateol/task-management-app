@@ -13,6 +13,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+::-webkit-scrollbar {
+  width: 5px; /* Ancho de la scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color de fondo de la scrollbar */
+  border-radius: 10px; /* Radio de borde de la scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color del scrollbar thumb (el área deslizante) */
+  border-radius: 10px; /* Radio de borde del scrollbar thumb */
+}
+
 /* 
 Font size system (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 
@@ -191,6 +205,7 @@ html {
 .tasks__container {
   background-color: #242424;
   height: 90vh;
+  overflow-y: scroll;
 }
 
 .status__container {
