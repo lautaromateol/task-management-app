@@ -76,7 +76,11 @@ class TasksView extends View {
     cardsMarkups.todo = this._data.map((task) => {
       return task.status === "todo" ?
         `<div data-id="${task.id}" class="task__card">
-          <p>${task.title}</p>
+          <p>
+          ${task.title.split(' ').slice(0, 6).join(' ')}
+          <br/>
+          ${task.title.split(' ').slice(6).join(' ')}
+          </p>
           <span> ${task.subtasks.map(subtask => subtask.status === "complete" ? 1 : 0).reduce((a, b) => a + b, 0)} of ${task.subtasks.length} subtasks</span>
         </div>` : ""
     })
@@ -84,7 +88,11 @@ class TasksView extends View {
     cardsMarkups.doing = this._data.map((task) => {
       return task.status === "doing" ?
         `<div data-id="${task.id}" class="task__card">
-          <p>${task.title}</p>
+          <p>
+          ${task.title.split(' ').slice(0, 6).join(' ')}
+          <br/>
+          ${task.title.split(' ').slice(6).join(' ')}
+          </p>
           <span> ${task.subtasks.map(subtask => subtask.status === "complete" ? 1 : 0).reduce((a, b) => a + b, 0)} of ${task.subtasks.length} subtasks</span>
         </div>` : ""
     })
@@ -92,9 +100,14 @@ class TasksView extends View {
     cardsMarkups.done = this._data.map((task) => {
       return task.status === "done" ?
         `<div data-id="${task.id}" class="task__card">
-          <p>${task.title}</p>
+          <p>
+          ${task.title.split(' ').slice(0, 6).join(' ')}
+          <br/>
+          ${task.title.split(' ').slice(6).join(' ')}
+          </p>
           <span> ${task.subtasks.map(subtask => subtask.status === "complete" ? 1 : 0).reduce((a, b) => a + b, 0)} of ${task.subtasks.length} subtasks</span>
-        </div>` : ""
+        </div>
+      ` : ""
     })
 
     const statusContainers = ["todo", "doing", "done"].map((status) => {
