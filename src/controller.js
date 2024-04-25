@@ -54,6 +54,9 @@ const controlAddProject = (modal) => {
 
   // 6. Update projects 
   projectsView.render(model.state.projects)
+
+  // 7. Update projects length at dashboard
+  projectsView.renderProjectsLength()
 }
 
 const controlAddTask = (modal) => {
